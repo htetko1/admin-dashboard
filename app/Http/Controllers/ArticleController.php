@@ -7,6 +7,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -17,6 +18,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
+//        $all = Article::all();
+//
+//        foreach ($all as $a){
+//                $a->slug = Str::slug($a->title);
+//                $a->update();
+//        }
         $articles =Article::when(isset(request()->search),function ($q){
             $search = request()->search;
             $q->orwhere("title","like","%$search%")->orwhere("description","like","%$search%");
@@ -51,6 +58,7 @@ class ArticleController extends Controller
 
         $article = new Article();
         $article->title = $request->title;
+        $article->slug = Str::slug($request->title)."_".uniqid();
         $article->category_id = $request->category;
         $article->description = $request->description;
         $article->user_id = Auth::id();
@@ -99,6 +107,7 @@ class ArticleController extends Controller
         ]);
 
         $article->title = $request->title;
+        $article->slug = Str::slug($request->title)."_".uniqid();
         $article->category_id = $request->category;
         $article->description = $request->description;
         $article->update();
