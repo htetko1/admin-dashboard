@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -18,6 +19,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
+//        $all = Category::all();
+//
+//        foreach ($all as $a){
+//                $a->slug = Str::slug($a->title);
+//                $a->update();
+//        }
         return view('category.index');
     }
 
@@ -45,6 +52,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->title = $request->title;
+        $category->slug = Str::slug($request->title)."_".uniqid();
         $category->user_id = Auth::id();
         $category->save();
 
@@ -89,6 +97,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->title = $request->title;
+        $category->slug = Str::slug($request->title)."_".uniqid();
         $category->user_id = Auth::id();
         $category->save();
 
