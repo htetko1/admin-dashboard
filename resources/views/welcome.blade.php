@@ -15,7 +15,7 @@
 
 
                     <div class="text-black-50 the-excerpt">
-                        <p CLASS="">{{ Str::words($article->description,50) }}</p>
+                        {{ $article->excerpt }}
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center see-more-group">

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->text('slug')->unique()->nullable()->after("title");
+            $table->text('excerpt')->nullable()->after('description');
         });
     }
 
