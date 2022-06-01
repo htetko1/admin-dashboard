@@ -106,6 +106,9 @@ class ArticleController extends Controller
             "description"=> "required|min:5|max:500"
         ]);
 
+        if ($article->title != $request->title){
+            $article->slug = Str::slug($request->title)."_".uniqid();
+        }
         $article->title = $request->title;
         $article->slug = Str::slug($request->title)."_".uniqid();
         $article->category_id = $request->category;
