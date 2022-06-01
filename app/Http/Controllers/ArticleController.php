@@ -53,7 +53,7 @@ class ArticleController extends Controller
         $request->validate([
             "category"=> "required|exists:categories,id",
             "title"=> "required|min:5|max:100",
-            "description"=> "required|min:5|max:500"
+            "description"=> "required|min:5|max:5000"
         ]);
 
         $article = new Article();
@@ -61,6 +61,7 @@ class ArticleController extends Controller
         $article->slug = Str::slug($request->title)."_".uniqid();
         $article->category_id = $request->category;
         $article->description = $request->description;
+        $article->excerpt = Str::words($request->description,50);
         $article->user_id = Auth::id();
         $article->save();
 
@@ -113,6 +114,7 @@ class ArticleController extends Controller
         $article->slug = Str::slug($request->title)."_".uniqid();
         $article->category_id = $request->category;
         $article->description = $request->description;
+        $article->excerpt = Str::words($request->description,50);
         $article->update();
 
 
