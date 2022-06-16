@@ -4,7 +4,7 @@
         <div class="py-3">
 
             <div class="small post-category mb-3">
-                <a href="{{ route('baseOnCategory',$article->category->id) }}" rel="category tag">{{ $article->category->title }}</a>
+                <a href="{{ route('baseOnCategory',$article->category->slug) }}" rel="category tag">{{ $article->category->title }}</a>
             </div>
 
             <h2 class="fw-bolder">{{ $article->title }}</h2>
@@ -17,7 +17,7 @@
                                  class="avatar avatar-50 photo rounded-circle" height="50" width="50"
                                  loading="lazy">
                         @else
-                            <img alt="" src="{{ asset('dashboard/img/hetko.jpg') }}"
+                            <img alt="" src="{{ asset('images/user-default-avatar.png') }}"
                                  class="avatar avatar-50 photo rounded-circle" height="50" width="50"
                                  loading="lazy">
                         @endif

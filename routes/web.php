@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\userManagerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,24 +25,38 @@ Route::view("/about","blog.about")->name('about');
 
 Auth::routes();
 
-Route::prefix('dashboard')->middleware("auth")->group(function (){
+Route::middleware(["auth","IsBaned"])->group(function (){
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('category','App\Http\Controllers\CategoryController');
-    Route::resource('article','App\Http\Controllers\ArticleController');
+    Route::middleware("AdminOnly")->group(function (){
+        Route::get("/user-manager",[UserManagerController::class,'index'])->name('user-manager.index');
+        Route::post("/make-admin",[UserManagerController::class,'makeAdmin'])->name('user-manager.makeAdmin');
+        Route::post("/ban-user",[UserManagerController::class,'BanUser'])->name('user-manager.ban-user');
+        Route::post("/restore-user",[UserManagerController::class,'RestoreUser'])->name('user-manager.restore-user');
+        Route::post("/change-user-password",[UserManagerController::class,'changeUserPassword'])->name('user-manager.change-user-password');
+
+    });
+    Route::prefix('dashboard')->middleware("auth")->group(function (){
+
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::resource('category','App\Http\Controllers\CategoryController');
+        Route::resource('article','App\Http\Controllers\ArticleController');
 
 
-    Route::prefix('profile')->group(function () {
-        //Main Frame Route
-        Route::get('/', [ProfileController::class,'profile'])->name('profile');
-        Route::get('/profile-edit', [ProfileController::class,'edit'])->name('profile.edit');
-        Route::get('/edit-password', [ProfileController::class,'password'])->name('profile.edit.password');
-        Route::get('/edit-name-and-email', [ProfileController::class,'NameEmail'])->name('profile.edit.name.email');
-        Route::get('/edit-photo', [ProfileController::class,'photo'])->name('profile.edit.photo');
+        Route::prefix('profile')->group(function () {
+            //Main Frame Route
+            Route::get('/', [ProfileController::class,'profile'])->name('profile');
+            Route::get('/profile-edit', [ProfileController::class,'edit'])->name('profile.edit');
+            Route::get('/edit-password', [ProfileController::class,'password'])->name('profile.edit.password');
+            Route::get('/edit-name-and-email', [ProfileController::class,'NameEmail'])->name('profile.edit.name.email');
+            Route::get('/edit-photo', [ProfileController::class,'photo'])->name('profile.edit.photo');
 
-        Route::post('/change-photo', [ProfileController::class,'ChangePhoto'])->name('profile.ChangePhoto');
-        Route::post('/change-name', [ProfileController::class,'ChangeName'])->name('profile.ChangeName');
-        Route::post('/change-email', [ProfileController::class,'ChangeEmail'])->name('profile.ChangeEmail');
-        Route::post('/change-password', [ProfileController::class,'ChangePassword'])->name('profile.ChangePassword');
+            Route::post('/change-photo', [ProfileController::class,'ChangePhoto'])->name('profile.ChangePhoto');
+            Route::post('/change-name', [ProfileController::class,'ChangeName'])->name('profile.ChangeName');
+            Route::post('/change-email', [ProfileController::class,'ChangeEmail'])->name('profile.ChangeEmail');
+            Route::post('/change-password', [ProfileController::class,'ChangePassword'])->name('profile.ChangePassword');
+            Route::post("/update-user-info",[ProfileController::class,"updateInfo"])->name("profile.update.info");
+        });
     });
 });
+
+

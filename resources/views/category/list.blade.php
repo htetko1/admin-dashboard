@@ -25,15 +25,15 @@
                 </form>
             </td>
             <td>
-                                    <span class="small">
-                                        <i class="feather-calendar"></i>
-                                        {{ $category->created_at->format('d-m-y') }}
-                                    </span>
+             <span class="small">
+              <i class="feather-calendar"></i>
+              {{ $category->created_at->format('d-m-y') }}
+              </span>
                 <br>
                 <span class="small">
-                                         <i class="feather-clock"></i>
-                                        {{ $category->created_at->format('h:i A') }}
-                                    </span>
+                <i class="feather-clock"></i>
+                {{ $category->created_at->format('h:i A') }}
+                </span>
             </td>
         </tr>
     @empty

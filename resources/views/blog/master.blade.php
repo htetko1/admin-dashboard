@@ -79,7 +79,7 @@
                     <div id="category" class="mb-3">
                         <h4 class="fw-bolder">Category Lists</h4>
                         <ul class="list-group">
-                            @foreach($categories as $category)
+                            @foreach( $categories as $category)
                                 <li class="list-group-item">
                                     <a href="{{ route('baseOnCategory',$category->slug) }}" class="{{ request()->url() == route('baseOnCategory',$category->slug) ? 'active':'' }}">{{ $category->title }}</a>
                                 </li>

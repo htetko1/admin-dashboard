@@ -1,15 +1,15 @@
 @extends('blog.master')
 @section('content')
     <div class="">
-        @forelse($articles as $article)
+        @forelse( $articles as $article)
             <div class="border-bottom mb-4 pb-4 article-preview">
                 <div class="p-0 p-md-3">
                     <a class="fw-bold h4 d-block text-decoration-none"
-                       href="{{ route('detail',$article->id) }}">
+                       href="{{ route('detail',$article->slug) }}">
                         {{ $article->title }} </a>
 
                     <div class="small post-category mb-3">
-                        <a href="{{ route('baseOnCategory',$article->category->id) }}" class="" rel="category tag">{{ $article->category->title }}</a>
+                        <a href="{{ route('baseOnCategory',$article->category->slug) }}" class="" rel="category tag">{{ $article->category->title }}</a>
                     </div>
 
 
@@ -25,7 +25,7 @@
                                      class="avatar avatar-50 photo rounded-circle" height="50" width="50"
                                      loading="lazy">
                             @else
-                                <img alt="" src="{{ asset('dashboard/img/hetko.jpg') }}"
+                                <img alt="" src="{{ asset('images/user-default-avatar.png') }}"
                                      class="avatar avatar-50 photo rounded-circle" height="50" width="50"
                                      loading="lazy">
                             @endif

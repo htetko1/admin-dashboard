@@ -25,6 +25,12 @@
             <x-menu-item name="Create Article" link="{{ route('article.create') }}" class="feather-plus-circle"></x-menu-item>
             <x-menu-item name="Article List" link="{{ route('article.index') }}" class="feather-list"></x-menu-item>
 
+
+            @if(\Illuminate\Support\Facades\Auth::user()->role == 0)
+            <x-menu-title title="User Management"></x-menu-title>
+            <x-menu-item name="User" class="feather-users" link="{{ route('user-manager.index') }}"></x-menu-item>
+            @endif
+
             <x-menu-title title="User Profile"></x-menu-title>
             <x-menu-item name="Your Profile" link="{{ route('profile') }}" class="feather-user"></x-menu-item>
             <x-menu-item name="Change Password" link="{{ route('profile.edit.password') }}" class="feather-refresh-cw"></x-menu-item>

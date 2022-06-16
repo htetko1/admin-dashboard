@@ -38,6 +38,11 @@
 <script src="{{ asset('dashboard/js/dashboard.js') }}"></script>
 @yield('foot')
 
+@auth
+    @include("user-profile.update-info")
+@endauth
+
+{{--@include("toast")--}}
 </body>
 
 </html>

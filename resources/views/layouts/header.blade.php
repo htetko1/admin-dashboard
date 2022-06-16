@@ -23,7 +23,7 @@
                     aria-expanded="false"
                 >
                     <img src="{{ isset(Auth::user()->photo) ? asset('storage/profile/'.Auth::user()->photo) : asset('dashboard/img/htetko.jpg') }}" class="user-img" alt="" />
-                    <span class="text-white text-uppercase">Htet Ko</span>
+                    <span class="text-white text-uppercase">{{ auth()->user()->name }}</span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="#">Action</a></li>

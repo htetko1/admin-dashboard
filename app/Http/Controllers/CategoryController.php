@@ -95,7 +95,7 @@ class CategoryController extends Controller
             "title" => "required|unique:categories,title"
         ]);
 
-        $category = new Category();
+//        $category = new Category();
         $category->title = $request->title;
         $category->slug = Str::slug($request->title)."_".uniqid();
         $category->user_id = Auth::id();

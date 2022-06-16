@@ -24,6 +24,11 @@ class ArticleController extends Controller
 //                $a->slug = Str::slug($a->title);
 //                $a->update();
 //        }
+//        $all = Article::all();
+//        foreach ($all as $a){
+//                $a->excerpt = Str::words($a->description,50);
+//                $a->update();
+//        }
         $articles =Article::when(isset(request()->search),function ($q){
             $search = request()->search;
             $q->orwhere("title","like","%$search%")->orwhere("description","like","%$search%");

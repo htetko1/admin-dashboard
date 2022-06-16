@@ -55,7 +55,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($articles as $article)
+                        @forelse( $articles as $article)
                             <tr>
                                 <td>{{ $article->id }}</td>
                                 <td>
